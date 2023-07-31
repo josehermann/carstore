@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-4">Ajouter un article</h1>
+    
+    {# {{ form(form) }} #}
+    {# ! la fonction form() affiche tout le formulaire d'un seul block nom modifiable #}
+    {{ form_start(formArticle)}}
+        
+    {# ! en twig un tableau   { indice: valeur }  en PHP [ indice => valeur ] #}
+        {{ form_row(formArticle.title , {
+            label: "Titre",
+            attr: { placeholder: "le titre de l'article" }
+        }) }}
+
+        {{ form_row(formArticle.image) }}
+
+        {{ form_row(formArticle.content)}}
+
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+
+    {{ form_end(formArticle)}}
+
+
+{% endblock %}
