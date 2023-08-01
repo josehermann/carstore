@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,11 +34,28 @@ class BlogController extends AbstractController
     }
 
     #[Route('/blog/ajout', name:"blog_ajout")]
-    public function form() : Response
+    public function form(Request $globals, EntityManagerInterface $manager ) : Response
     {
         $article = new Article;
 
-        $form = $this->createForm(ArticleType::class);
+        $form = $this->createForm(ArticleType::class, $article);
+
+        $form->handleRequest($globals);
+        // * handleRequest() permet de récupérer tout les données de mes inputs
+        if($form->isSubmitted() && $form->isValid())
+        {
+            // dd($globals->request);
+            // $article->setTitle('un titre');
+            $article->setCreatedAt(new \Datetime);
+            // dd($article);
+            //*persist() va permettre de préparer ma requete SQL a envoyer par rapport a l'objet donné en argument
+            $manager->persist($article);
+            //* flush() permettre d'executer tout les persist précédent
+            $manager->flush();
+            //* redirectToRoute() permet de rediriger vers une autre page de notre site a l'aide du nom de la route (name)
+            return $this->redirectToRoute('home');
+        }
+
         
         return $this->render('blog/form.html.twig', [
             'formArticle' => $form
