@@ -65,4 +65,13 @@ class BlogController extends AbstractController
             'formArticle' => $form
         ]);
     }
+
+    #[Route('/blog/gestion', name:'blog_gestion')]
+    public function gestion(ArticleRepository $repo) : Response
+    {
+        $articles = $repo->findAll();
+        return $this->render('blog/gestion.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
 }
