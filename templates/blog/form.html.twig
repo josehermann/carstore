@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1 class="text-center my-4">Ajouter un article</h1>
-    
+    <div class="container">
     {# {{ form(form) }} #}
     {# ! la fonction form() affiche tout le formulaire d'un seul block nom modifiable #}
     {{ form_start(formArticle)}}
@@ -22,6 +22,6 @@
         <button type="submit" class="btn btn-primary">Envoyer</button>
 
     {{ form_end(formArticle)}}
-
+    </div>
 
 {% endblock %}
