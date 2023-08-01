@@ -37,11 +37,16 @@ class BlogController extends AbstractController
         //* l'indice étant le nom de la variable dans le fichier twig et valeur sa valeur réel
     }
 
+    #[Route('/blog/modifier/{id}', name:"blog_modifier")]
     #[Route('/blog/ajout', name:"blog_ajout")]
-    public function form(Request $globals, EntityManagerInterface $manager ) : Response
+    public function form(Request $globals, EntityManagerInterface $manager, Article $article = null ) : Response
     {
-        $article = new Article;
-
+        // dd($article);
+        if($article == null)
+        {
+            $article =  new Article ;
+        }
+         dd($article);
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($globals);
@@ -62,7 +67,7 @@ class BlogController extends AbstractController
 
         
         return $this->render('blog/form.html.twig', [
-            'formArticle' => $form
+            'formArticle' => $form,
         ]);
     }
 
@@ -72,6 +77,15 @@ class BlogController extends AbstractController
         $articles = $repo->findAll();
         return $this->render('blog/gestion.html.twig', [
             'articles' => $articles,
+        ]);
+    }
+
+    #[Route('/blog/show/{id}', name:"blog_show")]
+    public function show($id, ArticleRepository $repo)
+    {
+        $article = $repo->find($id) ;
+        return $this->render('blog/show.html.twig', [
+            'article' => $article,
         ]);
     }
 }

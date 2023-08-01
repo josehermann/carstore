@@ -16,6 +16,9 @@
                         {# * le filtre raw permet d'interprété les balises HTML #}
                         {{ article.content|raw }}
                         <p>Ecrit le {{ article.createdAt|date('d/m/Y à H:i:s') }}</p>
+                        <div class="text-center">
+                            <a href="{{ path('blog_show', {id: article.id} ) }}" class="btn btn-primary">voir plus</a>
+                        </div>
                     </div>
                 </div>
             
