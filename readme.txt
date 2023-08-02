@@ -11,6 +11,8 @@ elle aura comme propriété :
 "Les voitures"
 mettre un lien dans la navbar pour accéder a cette page.
 
-
--créer une méthode et une route pour afficher une nouvelle page qui affichera le formulaire d'ajout de voiture.
+-créer le formulaire d'ajout de voiture (php bin/console make:form VoitureType)
+-créer une méthode et une route pour afficher une nouvelle page qui affichera le formulaire d'ajout de voiture.(VoitureController)
+-mettre le lien dans la barre de navigation
+-afficher sur la page créer hier toute les voitures de la bdd
 
