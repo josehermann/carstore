@@ -1,0 +1,1 @@
+posteploy: php bin/console doctrine:migration:migrate
