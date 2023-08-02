@@ -4,4 +4,10 @@
 
 {% block body %}
     <h1 class="text-center my-4">Les Voitures</h1>
+    <div class="container">
+    {% for voiture in items %}
+        {{ voiture.marque }}
+        <br>
+    {% endfor %}
+    </div>
 {% endblock %}
